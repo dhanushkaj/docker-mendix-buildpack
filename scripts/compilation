@@ -19,7 +19,7 @@ def export_vcap_services():
 
     vcap_services = dict()
     vcap_services['PostgreSQL'] = [{'credentials': { 'uri': "postgres://mendix:mendix@172.17.0.2:5432/mendix" } }]
-    if os.environ['Newrelic_Enable'] == 1:
+    if os.environ['Newrelic_Enable']=='1':
        vcap_services["newrelic"] = [{'credentials': { 'licenseKey': 'testkey'}}]
     vcap_services_str = json.dumps(vcap_services , sort_keys=True, indent=4,
         separators=(',', ': '))
