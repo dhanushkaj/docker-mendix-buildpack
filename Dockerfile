@@ -6,6 +6,7 @@
 FROM mendix/rootfs
 LABEL Author="Mendix Digital Ecosystems"
 LABEL maintainer="digitalecosystems@mendix.com"
+ENV Newrelic_Enable=1
 
 # Build-time variables
 ARG BUILD_PATH=project

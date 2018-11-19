@@ -19,7 +19,8 @@ def export_vcap_services():
 
     vcap_services = dict()
     vcap_services['PostgreSQL'] = [{'credentials': { 'uri': "postgres://mendix:mendix@172.17.0.2:5432/mendix" } }]
-    vcap_services["newrelic"] = [{'credentials': { 'licenseKey': 'testkey'}}]
+    if os.environ['Newrelic_Enable'] == 1:
+       vcap_services["newrelic"] = [{'credentials': { 'licenseKey': 'testkey'}}]
     vcap_services_str = json.dumps(vcap_services , sort_keys=True, indent=4,
         separators=(',', ': '))
     logging.debug("Set environment variable VCAP_SERVICES: \n{0}"
@@ -33,6 +34,7 @@ def call_builpack_compilation():
 
 if __name__ == '__main__':
     logging.info("Mendix project compilation phase...")
+
     export_vcap_services()
     call_builpack_compilation()
     sys.exit(0)
